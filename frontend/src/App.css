@@ -1,0 +1,144 @@
+/* --- Google Font Import & CSS Variables --- */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Roboto:wght@400;700&display=swap');
+
+:root {
+  /* Updated with the new monochromatic color palette */
+  --background: #120A0A;     /* Near Black */
+  --surface: #4D433E;       /* Dark Brown/Charcoal */
+  --primary: #B7B9B8;       /* Light Gray */
+  --primary-hover: #FFFFFF;  /* Pure White for hover effect */
+  --text: #B7B9B8;           /* Light Gray */
+  --accent: #7E7772;         /* Muted Gray/Brown */
+  --font-body: "Roboto", sans-serif;
+  --font-code: "Fira Code", monospace;
+}
+
+/* --- General Resets & Body Styling --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  overflow: hidden; 
+}
+
+/* --- Animated Background --- */
+.join-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  /* An extremely subtle gradient with the new dark tones */
+  background: linear-gradient(-45deg, #120A0A, #211915, #120A0A, #4D433E);
+  background-size: 400% 400%;
+  animation: gradientBG 25s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* --- Glassmorphism Form Container --- */
+.join-form {
+  /* Dark semi-transparent background based on the surface color */
+  background: rgba(77, 67, 62, 0.3); 
+  backdrop-filter: blur(10px); 
+  /* Border uses a lighter accent color */
+  border: 1px solid rgba(126, 119, 114, 0.2);
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  text-align: center;
+  width: 380px;
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Code-Editor Style Header --- */
+h1 {
+  font-family: var(--font-code);
+  font-size: 2.5rem;
+  color: var(--text);
+  margin-bottom: 2rem;
+  display: inline-block; 
+  position: relative;
+}
+
+h1::after {
+  content: '';
+  position: absolute;
+  top: 5px; 
+  right: -18px; 
+  width: 10px;
+  height: 2.5rem;
+  /* Cursor now uses the primary light gray color */
+  background: var(--primary);
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  from, to { background: transparent; }
+  50% { background: var(--primary); }
+}
+
+/* --- Enhanced Inputs --- */
+input {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  background-color: rgba(0, 0, 0, 0.2);
+  /* Dark charcoal for the default border */
+  border: 1px solid var(--surface); 
+  border-radius: 6px;
+  color: var(--text);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input::placeholder {
+  color: rgba(183, 185, 184, 0.5); /* Faded light gray for placeholder */
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--primary);
+  /* Focus glow is now a soft gray */
+  box-shadow: 0 0 0 3px rgba(183, 185, 184, 0.3);
+}
+
+/* --- Interactive Button --- */
+button {
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--primary);
+  /* Dark text for high contrast on the light gray button */
+  color: var(--background);
+  font-weight: bold;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  /* On hover, the button becomes pure white for a crisp highlight */
+  background-color: var(--primary-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+  transform: translateY(-1px);
+}
