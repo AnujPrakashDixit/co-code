@@ -44,7 +44,7 @@ const App = () => {
     <div className="sidebar">
       <div className="room-info">
         <h2>Code Room : {roomId}</h2>
-        <button onClick={copyRoomId}>Copy ID</button>
+        <button onClick={copyRoomId} className='copy-button'>Copy ID</button>
       </div>
       <h3>Users in Room:</h3>
       <ul>
@@ -63,6 +63,7 @@ const App = () => {
     <div className="editor-wrapper">
       <Editor 
       height={"100%"}
+      width={"100%"}
       defaultLanguage={language}
       language={language}
       value={code}

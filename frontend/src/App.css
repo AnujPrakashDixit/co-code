@@ -1,15 +1,27 @@
 /* --- Google Font Import & CSS Variables --- */
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Fira+Code:wght@400;700&display=swap');
 
 :root {
-  /* Updated with the new monochromatic color palette */
-  --background: #120A0A;     /* Near Black */
-  --surface: #4D433E;       /* Dark Brown/Charcoal */
-  --primary: #B7B9B8;       /* Light Gray */
-  --primary-hover: #FFFFFF;  /* Pure White for hover effect */
-  --text: #B7B9B8;           /* Light Gray */
-  --accent: #7E7772;         /* Muted Gray/Brown */
-  --font-body: "Roboto", sans-serif;
+  /* Black & Teal Palette */
+  --true-black: #000000;
+  --dark-charcoal: #1F1F1F;
+  --bright-teal: #1ECE9A;
+  --dark-teal: #199F78;
+  --off-white: #F1F2F6; /* Added for text readability */
+
+  --background: var(--true-black);
+  --surface: var(--dark-charcoal);
+  --form-bg-alpha: rgba(31, 31, 31, 0.7);
+  --mid-tone: var(--dark-charcoal);
+  --primary: var(--bright-teal);
+  --primary-hover: var(--dark-teal);
+  --text: var(--off-white);
+  --accent: var(--dark-teal);
+  --subtle-text: rgba(241, 242, 246, 0.7);
+  --danger: #e74c3c;
+  --danger-hover: #c0392b;
+  --focus-glow-alpha: rgba(30, 206, 154, 0.3);
+  --font-body: "Poppins", sans-serif;
   --font-code: "Fira Code", monospace;
 }
 
@@ -26,14 +38,13 @@ body {
   overflow: hidden; 
 }
 
-/* --- Animated Background --- */
+/* --- Login Page Styles --- */
 .join-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  /* An extremely subtle gradient with the new dark tones */
-  background: linear-gradient(-45deg, #120A0A, #211915, #120A0A, #4D433E);
+  background: linear-gradient(-45deg, var(--true-black) 0%, var(--dark-charcoal) 100%);
   background-size: 400% 400%;
   animation: gradientBG 25s ease infinite;
 }
@@ -44,13 +55,10 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* --- Glassmorphism Form Container --- */
 .join-form {
-  /* Dark semi-transparent background based on the surface color */
-  background: rgba(77, 67, 62, 0.3); 
+  background: var(--form-bg-alpha);
   backdrop-filter: blur(10px); 
-  /* Border uses a lighter accent color */
-  border: 1px solid rgba(126, 119, 114, 0.2);
+  border: 1px solid rgba(241, 242, 246, 0.2); /* White border */
   padding: 2.5rem;
   border-radius: 12px;
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
@@ -64,8 +72,7 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- Code-Editor Style Header --- */
-h1 {
+h1 { /* Applies to login H1 */
   font-family: var(--font-code);
   font-size: 2.5rem;
   color: var(--text);
@@ -74,15 +81,14 @@ h1 {
   position: relative;
 }
 
-h1::after {
+h1::after { /* Blinking cursor for login H1 */
   content: '';
   position: absolute;
   top: 5px; 
   right: -18px; 
   width: 10px;
   height: 2.5rem;
-  /* Cursor now uses the primary light gray color */
-  background: var(--primary);
+  background: var(--primary); /* Teal cursor */
   animation: blink 1s step-end infinite;
 }
 
@@ -91,15 +97,13 @@ h1::after {
   50% { background: var(--primary); }
 }
 
-/* --- Enhanced Inputs --- */
-input {
+input { /* Applies to login inputs */
   width: 100%;
   padding: 1rem;
   margin-bottom: 1.5rem;
   font-size: 1rem;
   font-family: var(--font-body);
-  background-color: rgba(0, 0, 0, 0.2);
-  /* Dark charcoal for the default border */
+  background-color: rgba(0, 0, 0, 0.4); /* Darker input background */
   border: 1px solid var(--surface); 
   border-radius: 6px;
   color: var(--text);
@@ -107,23 +111,20 @@ input {
 }
 
 input::placeholder {
-  color: rgba(183, 185, 184, 0.5); /* Faded light gray for placeholder */
+  color: var(--subtle-text); 
 }
 
 input:focus {
   outline: none;
   border-color: var(--primary);
-  /* Focus glow is now a soft gray */
-  box-shadow: 0 0 0 3px rgba(183, 185, 184, 0.3);
+  box-shadow: 0 0 0 3px var(--focus-glow-alpha);
 }
 
-/* --- Interactive Button --- */
-button {
+button { /* Applies to login button */
   width: 100%;
   padding: 1rem;
-  background-color: var(--primary);
-  /* Dark text for high contrast on the light gray button */
-  color: var(--background);
+  background-color: var(--primary); /* Teal button */
+  color: var(--background);        /* Black text on button */
   font-weight: bold;
   font-size: 1rem;
   border: none;
@@ -133,12 +134,230 @@ button {
 }
 
 button:hover {
-  /* On hover, the button becomes pure white for a crisp highlight */
-  background-color: var(--primary-hover);
+  background-color: var(--primary-hover); /* Darker teal on hover */
   transform: translateY(-3px);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 button:active {
   transform: translateY(-1px);
+}
+
+
+/* --- EDITOR CONTAINER STYLING --- */
+.editor-container {
+  display: flex;
+  height: 100vh;
+  background-color: var(--background); 
+  font-family: var(--font-body); 
+  color: var(--text); 
+}
+
+.editor-container .sidebar {
+  width: 280px; 
+  padding: 1.8rem 1.5rem;
+  background: var(--form-bg-alpha);
+  backdrop-filter: blur(8px); 
+  border-right: 1px solid rgba(241, 242, 246, 0.1); /* Subtle white border */
+  display: flex; 
+  flex-direction: column;
+  justify-content: space-between; 
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Sidebar Header - "Code Room" text */
+.editor-container .sidebar .sidebar-header {
+    font-family: var(--font-code);
+    font-size: 1.8rem;
+    color: var(--text);
+    margin-bottom: 2rem;
+    text-align: center;
+    position: relative;
+}
+.editor-container .sidebar .sidebar-header::after {
+    content: '';
+    position: absolute;
+    top: 5px; 
+    right: 30px; 
+    width: 8px;
+    height: 1.8rem;
+    background: var(--primary); /* Teal cursor */
+    animation: blink 1s step-end infinite;
+}
+
+
+.editor-container .sidebar .room-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  text-align: center; 
+  margin-bottom: 2rem; 
+  padding-bottom: 1.5rem;
+  border-top: 1px solid rgba(241, 242, 246, 0.1); 
+  padding-top: 1.5rem;
+}
+
+.editor-container .sidebar .room-info h2 {
+  font-family: var(--font-code); 
+  font-size: 1.4rem; 
+  color: var(--text); 
+  margin-bottom: 0.8rem; 
+  letter-spacing: 1px;
+}
+
+.editor-container .sidebar .room-info .copy-button {
+  padding: .7rem 1.5rem;
+  background-color: var(--primary); /* Teal copy button */
+  color: var(--background); 
+  border: none;
+  border-radius: 6px; 
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: bold; 
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    background-color: var(--primary-hover);
+    color: var(--background);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.editor-container .sidebar h3 { /* "Users in Room" title */
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.1rem; 
+  color: var(--text);
+  text-align: left;
+  padding-left: 0.5rem;
+  border-bottom: 1px solid rgba(241, 242, 246, 0.1);
+  padding-bottom: 0.5rem;
+}
+
+.editor-container .sidebar ul {
+  list-style: none;
+  padding: 0; 
+  margin: 0;
+}
+
+.editor-container .sidebar ul li {
+  padding: .7rem 1rem;
+  font-size: 0.95rem;
+  background: rgba(31, 31, 31, 0.5); /* Semi-transparent charcoal */
+  margin-top: 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-left: 4px solid transparent;
+  transition: background-color 0.3s ease, border-left-color 0.3s ease;
+  color: var(--text);
+}
+
+.editor-container .sidebar ul li.active-user {
+    border-left-color: var(--accent); /* Highlight active user with dark teal */
+    background-color: rgba(31, 31, 31, 0.7);
+    font-weight: bold;
+}
+.editor-container .sidebar ul li::before {
+    content: '👤';
+    margin-right: 5px;
+    font-size: 1.1em;
+    opacity: 0.7;
+}
+
+.editor-container .sidebar .typing-indicator {
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--subtle-text);
+  font-style: italic;
+  text-align: center;
+  padding-bottom: 1rem;
+}
+
+.editor-container .sidebar .language-selector {
+  margin-top: 1.5rem; 
+  width: 100%;
+  padding: .8rem;
+  background-color: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--mid-tone); 
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  -webkit-appearance: none; 
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http://www.w3.org/2000/svg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23F1F2F6%22%20d%3D%22M287%2C114.7L154.5%2C247.2c-2.3%2C2.3-5.3%2C3.5-8.3%2C3.5s-6.1-1.2-8.3-3.5L5.4%2C114.7c-4.5-4.5-4.5-11.7%2C0-16.2c4.5-4.5%2C11.7-4.5%2C16.2%2C0l124.6%2C124.6l124.6-124.6c4.5-4.5%2C11.7-4.5%2C16.2%2C0C291.5%2C103%2C291.5%2C110.2%2C287%2C114.7z%22/%3E%3C/svg%3E'); 
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px auto;
+  padding-right: 30px; 
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  &:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--focus-glow-alpha);
+  }
+}
+
+
+.editor-container .sidebar .leave-button {
+  margin-top: 2.5rem;
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--danger); 
+  color: #FFFFFF; /* White text on danger button for max contrast */
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem; 
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-weight: bold;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+
+  &:hover {
+    background-color: var(--danger-hover); 
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+  }
+  &:active {
+    transform: translateY(-1px);
+  }
+}
+
+.editor-container .editor-wrapper {
+  flex-grow: 1;
+  background-color: var(--background); 
+}
+
+/* Glass Shine Effect for Sidebar */
+.editor-container .sidebar::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -100%;
+  width: 50px;
+  height: 200%;
+  background: linear-gradient(
+    to bottom,
+    rgba(241, 242, 246, 0),
+    rgba(241, 242, 246, 0.15), /* Changed from 0.30 to 0.15 for 30% opacity on the peak */
+    rgba(241, 242, 246, 0)
+  ); 
+}
+
+@keyframes shine-effect {
+  to {
+    left: 150%;
+  }
 }
